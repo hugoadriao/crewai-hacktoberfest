@@ -1,0 +1,29 @@
+Sistema de Chamados de TI — Fluxo Genérico para VPN
+
+Escopo: Orienta funcionários a abrir chamado para problemas de acesso à VPN.
+
+Pré-requisitos:
+- Coletar evidências: prints de erro, logs (cliente VPN), horário e rede utilizada.
+- Verificar credenciais e status de expiração.
+- Testar reconexão e reinício do cliente VPN.
+
+Passos para abrir chamado:
+1) Acessar o sistema de chamados e selecionar "Novo Chamado".
+2) Categorizar: Serviço > Rede > VPN (Acesso/Autenticação).
+3) Prioridade sugerida: Média (elevar para Alta se bloquear atividades críticas).
+4) Descrever o problema: sintomas, frequência, mensagens de erro e impactos.
+5) Preencher campos: usuário, equipamento, localização (remoto/escritório), horário.
+6) Anexar evidências: prints, logs, número da versão do cliente VPN.
+7) Informar testes realizados: reinício, troca de rede, atualização do cliente, limpeza de cache.
+8) Indicar janela de atendimento preferencial e contato.
+9) Revisar SLA sugerido e confirmar abertura.
+10) Acompanhar atualizações e responder solicitações de diagnóstico (por ex. traceroute, ping, ipconfig).
+
+Critérios de aceite/resolução:
+- Acesso restabelecido sem erros.
+- Validação de autenticação/rotas.
+- Registro de causa raiz e ações corretivas.
+
+Observações:
+- Escalar para rede/infraestrutura se houver indisponibilidade regional.
+- Consulte procedimentos internos salvos neste diretório para políticas específicas.

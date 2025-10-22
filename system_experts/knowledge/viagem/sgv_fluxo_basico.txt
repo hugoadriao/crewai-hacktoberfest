@@ -1,0 +1,37 @@
+Sistema de Solicitações de Viagem (SGV) — Fluxo Básico
+
+Escopo: Orienta funcionários a criar solicitações de passagem aérea e de hospedagem. Ajuste estes passos conforme políticas internas da empresa.
+
+Pré-requisitos gerais:
+- Dados pessoais atualizados e centro de custo.
+- Política de viagens vigente e aprovação do gestor envolvido.
+- Documentos: justificativa, roteiro de viagem, orçamento(s) e, se aplicável, autorização prévia.
+
+Passos — Passagem Aérea:
+1) Acessar o SGV e selecionar "Nova Solicitação" > "Passagem Aérea".
+2) Preencher dados da viagem: origem, destino, datas, horários preferenciais, flexibilidade.
+3) Informar política aplicável: classe de voo, limites de custo, regras de remarcação.
+4) Anexar documentação: roteiro, justificativa, cotações (se exigidas), autorização prévia.
+5) Revisar campos obrigatórios: centro de custo, projeto, motivo, contato.
+6) Validar restrições: conflito de datas, política de classe, orçamento máximo.
+7) Salvar rascunho e revisar alertas do sistema.
+8) Enviar para análise interna (se houver etapa de compliance/financeiro).
+9) Confirmar resumo e anexos.
+10) Enviar para aprovação do gestor (último passo) e aguardar retorno.
+
+Passos — Hospedagem:
+1) Acessar o SGV e selecionar "Nova Solicitação" > "Hospedagem".
+2) Preencher dados: cidade, período, preferências (proximidade, tipo de acomodação).
+3) Aplicar política: limite de diária, categorias permitidas, impostos inclusos.
+4) Anexar comprovantes e justificativas, incluindo orçamento(s) comparativo(s) quando aplicável.
+5) Preencher campos obrigatórios: centro de custo, projeto, motivo.
+6) Validar valores e regras: limite de diária, necessidade de exceção.
+7) Salvar rascunho e revisar alertas do sistema.
+8) Enviar para etapas internas (se houver compliance/financeiro).
+9) Confirmar resumo e anexos.
+10) Enviar para aprovação do gestor (último passo) e aguardar retorno.
+
+Observações:
+- Em caso de erro de validação, ajuste os campos destacados e revalide.
+- Registre mensagens de exceção/política no campo de comentários.
+- Consulte a política local neste diretório para regras específicas.
