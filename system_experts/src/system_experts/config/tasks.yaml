@@ -1,17 +1,47 @@
-research_task:
+air_ticket_flow_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is {current_year}.
+    Explique, em passos numerados, como um funcionário solicita uma passagem aérea no sistema fictício de gestão de viagens.
+    Considere pré-requisitos, campos obrigatórios, anexos, regras de validação e o envio para aprovação do gestor como último passo.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    Guia detalhado com passos numerados, checklist de documentos, campos a preencher e validações comuns. Inclua dicas para erros frequentes.
+  agent: travel_requests_specialist
 
-reporting_task:
+accommodation_flow_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Explique, em passos numerados, como um funcionário solicita hospedagem no sistema fictício de gestão de viagens.
+    Considere política de viagem, limites de diária, anexos, e o envio para aprovação do gestor como último passo.
   expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    Guia detalhado com passos numerados, checklist de documentos, campos a preencher, validações e observações de política.
+  agent: travel_requests_specialist
+
+router_task:
+  description: >
+    Interprete a pergunta do usuário e decida qual fluxo executar: "passagem aérea", "hospedagem" ou "VPN".
+    Caso a intenção não esteja clara, peça esclarecimento mínimo e escolha a opção mais provável.
+  expected_output: >
+    Uma decisão textual indicando um dos rótulos: PASSAGEM_AEREA, HOSPEDAGEM, VPN
+  agent: router_manager
+
+air_ticket_flow_task:
+  description: >
+    Explique, em passos numerados, como um funcionário solicita uma passagem aérea no sistema fictício de gestão de viagens.
+    Considere pré-requisitos, campos obrigatórios, anexos, regras de validação e o envio para aprovação do gestor como último passo.
+  expected_output: >
+    Guia detalhado com passos numerados, checklist de documentos, campos a preencher e validações comuns. Inclua dicas para erros frequentes.
+  agent: travel_requests_specialist
+
+accommodation_flow_task:
+  description: >
+    Explique, em passos numerados, como um funcionário solicita hospedagem no sistema fictício de gestão de viagens.
+    Considere política de viagem, limites de diária, anexos, e o envio para aprovação do gestor como último passo.
+  expected_output: >
+    Guia detalhado com passos numerados, checklist de documentos, campos a preencher, validações e observações de política.
+  agent: travel_requests_specialist
+
+vpn_access_ticket_flow_task:
+  description: >
+    Explique um fluxo genérico para abrir um chamado de TI visando resolver problemas de acesso à VPN.
+    Inclua categorização do chamado, prioridade, anexos (logs/prints), reproduções do erro e critérios de aceite.
+  expected_output: >
+    Guia detalhado com passos numerados para abertura, campos a preencher, categorias recomendadas, anexos esperados, SLA sugerido e critérios de resolução.
+  agent: it_vpn_specialist

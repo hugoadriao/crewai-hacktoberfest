@@ -2,63 +2,78 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
+from crewai.knowledge.knowledge_config import KnowledgeConfig
+
+from utils import TRAVEL_DIR, TI_VPN_DIR
+
 
 @CrewBase
-class SystemExperts():
-    """SystemExperts crew"""
-
+class SystemExperts:
     agents: List[BaseAgent]
     tasks: List[Task]
 
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
-    
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
+    def router_manager(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
+            config=self.agents_config["router_manager"],  # type: ignore[index]
+            verbose=True,
         )
 
     @agent
-    def reporting_analyst(self) -> Agent:
+    def travel_requests_specialist(self) -> Agent:
         return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
+            config=self.agents_config["travel_requests_specialist"],  # type: ignore[index]
+            verbose=True,
+            knowledge_config=KnowledgeConfig(results_limit=8, score_threshold=0.45),
         )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
-    @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
+    @agent
+    def it_vpn_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["it_vpn_specialist"],  # type: ignore[index]
+            verbose=True,
+            knowledge_config=KnowledgeConfig(results_limit=8, score_threshold=0.45),
         )
 
     @task
-    def reporting_task(self) -> Task:
+    def router_task(self) -> Task:
         return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
+            config=self.tasks_config["router_task"],  # type: ignore[index]
+        )
+
+    @task
+    def air_ticket_flow_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["air_ticket_flow_task"],  # type: ignore[index]
+            output_file="guia_passagem_aerea.md",
+        )
+
+    @task
+    def accommodation_flow_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["accommodation_flow_task"],  # type: ignore[index]
+            output_file="guia_hospedagem.md",
+        )
+
+    @task
+    def vpn_access_ticket_flow_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["vpn_access_ticket_flow_task"],  # type: ignore[index]
+            output_file="guia_vpn.md",
         )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the SystemExperts crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
-
+        travel_flow_file = TRAVEL_DIR / "sgv_fluxo_basico.txt"
+        it_flow_file = TI_VPN_DIR / "vpn_fluxo_basico.txt"
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
-            process=Process.sequential,
+            agents=self.agents,
+            manager_llm="gpt-4.1",
+            tasks=self.tasks,
+            process=Process.hierarchical,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+            knowledge_sources=[
+                TextFileKnowledgeSource(file_paths=[travel_flow_file, it_flow_file])
+            ],
         )
